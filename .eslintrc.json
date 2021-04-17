@@ -1,0 +1,13 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "env": {
+    "es6": true,
+    "googleappsscript/googleappsscript": true
+  },
+  "plugins": ["@typescript-eslint", "googleappsscript"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "prettier"
+  ]
+}

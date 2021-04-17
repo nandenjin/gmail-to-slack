@@ -1,0 +1,35 @@
+{
+  "name": "@clab-team/gmail-to-slack",
+  "version": "0.0.0",
+  "author": {
+    "name": "Creative Media Lab Management Team",
+    "email": "clab-team@googlegroups.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/clab-team/gmail-to-slack.git"
+  },
+  "main": "src/index.ts",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "lint": "eslint .",
+    "lintfix": "eslint --fix .",
+    "format": "prettier --write .",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "@google/clasp": "^2.3.0",
+    "@slack/webhook": "^6.0.0",
+    "@types/google-apps-script": "^1.0.31",
+    "@types/jest": "^26.0.22",
+    "@typescript-eslint/eslint-plugin": "^4.22.0",
+    "@typescript-eslint/parser": "^4.22.0",
+    "eslint": "^7.24.0",
+    "eslint-config-prettier": "^8.2.0",
+    "eslint-plugin-googleappsscript": "^1.0.3",
+    "jest": "^26.6.3",
+    "prettier": "^2.2.1",
+    "ts-jest": "^26.5.5"
+  }
+}
