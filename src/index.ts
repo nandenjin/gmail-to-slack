@@ -2,14 +2,14 @@ import { IncomingWebhookSendArguments } from '@slack/webhook'
 
 enum PropertyKey {
   SLACK_URL = 'slackUrl',
-  GMAIL_LABEL = 'gmailLabel'
+  GMAIL_LABEL = 'gmailLabel',
 }
 
 /**
  * Handle time-based event execution
  */
 export function main(): void {
-  const labelName = PropertiesService.getScriptProperties().getProperty(PropertyKey.GMAIL_LABEL)
+  const labelName = getGmailLabel()
 
   if (!labelName || labelName.length === 0) {
     console.info('Please configure label to be used to forward. Abort')
@@ -58,7 +58,7 @@ export function doGet(): GoogleAppsScript.HTML.HtmlOutput {
  * @returns Email address that of current signed-in user
  */
 export function getUserEmail(): string {
-  return Session.getActiveUser().getEmail();
+  return Session.getActiveUser().getEmail()
 }
 
 /**
@@ -66,26 +66,28 @@ export function getUserEmail(): string {
  * @returns List of label name
  */
 export function getUserGmailLabels(): string[] {
-  const labels = GmailApp.getUserLabels()
-  return labels.map(label => label.getName())
+  return GmailApp.getUserLabels().map((label) => label.getName())
 }
 
 /**
  * Get label that is currently set
  */
 export function getGmailLabel(): string {
-  const props = PropertiesService.getScriptProperties()
-  return props.getProperty(PropertyKey.GMAIL_LABEL)
+  return PropertiesService.getScriptProperties().getProperty(
+    PropertyKey.GMAIL_LABEL
+  )
 }
 
 /**
  * Set label to mark up
  * @param label Name of label
- * @returns 
+ * @returns
  */
 export function setGmailLabel(label: string): string {
-  const props = PropertiesService.getScriptProperties()
-  props.setProperty(PropertyKey.GMAIL_LABEL, label)
+  PropertiesService.getScriptProperties().setProperty(
+    PropertyKey.GMAIL_LABEL,
+    label
+  )
   return label
 }
 
@@ -93,8 +95,9 @@ export function setGmailLabel(label: string): string {
  * Get Slack webhook URL that is currently set
  */
 export function getSlackUrl(): string {
-  const props = PropertiesService.getScriptProperties()
-  return props.getProperty(PropertyKey.SLACK_URL)
+  return PropertiesService.getScriptProperties().getProperty(
+    PropertyKey.SLACK_URL
+  )
 }
 
 /**
@@ -103,8 +106,10 @@ export function getSlackUrl(): string {
  * @returns New URL
  */
 export function setSlackUrl(url: string): string {
-  const props = PropertiesService.getScriptProperties()
-  props.setProperty(PropertyKey.SLACK_URL, url)
+  PropertiesService.getScriptProperties().setProperty(
+    PropertyKey.SLACK_URL,
+    url
+  )
   return url
 }
 
@@ -112,7 +117,9 @@ export function setSlackUrl(url: string): string {
  * @param msg Argument for Incoming Webhook
  */
 function postToSlack(msg: IncomingWebhookSendArguments): void {
-  const url = PropertiesService.getScriptProperties().getProperty(PropertyKey.SLACK_URL)
+  const url = PropertiesService.getScriptProperties().getProperty(
+    PropertyKey.SLACK_URL
+  )
 
   UrlFetchApp.fetch(url, {
     method: 'post',
