@@ -74,21 +74,27 @@ Push codes to project.
 clasp push
 ```
 
-Open GAS web editor and publish a deployment.
+Open GAS web editor and [publish a deployment](https://developers.google.com/apps-script/concepts/deployments).
 
 ```sh
 clasp open
 ```
 
-**Make sure the script is available only for yourself, or someone can get your configurations: list of your Gmail labels and Slack Webhook URL.**
+**Make sure the script is available only for yourself(Execute as = Me, Who has access = Only myself)** or someone can get your configurations: list of your Gmail labels and Slack Webhook URL.
+
+![](./docs/assets/gas_new-deployment.png)
 
 ### 4. Configure with Web UI
 
 Open the URL that be shown at deployment modal. Select a label to use to flag emails to be forwarded, and set Slack Outcoming Webhook URL.
 
+![](./docs/assets/gas_manage-deployment.png)
+
 ### 4. Configure trigger
 
-Back to GAS web editor and setup time-based trigger to function `main`.
+Back to GAS web editor and [setup time-driven trigger](https://developers.google.com/apps-script/guides/triggers/installable#managing_triggers_manually) to function `main`.
+
+![](./docs/assets/gas_new-trigger.png)
 
 All ready! Test the things by adding the label to some threads manually, and confirm that they will be forwarded to intended channel.
 
