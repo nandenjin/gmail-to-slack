@@ -86,9 +86,11 @@ clasp open
 
 ### 4. Configure with Web UI
 
-Open the URL that be shown at deployment modal. Select a label to use to flag emails to be forwarded, and set Slack Outcoming Webhook URL.
+Open the URL that be shown at deployment modal.
 
 ![](./docs/assets/gas_manage-deployment.png)
+
+Select a label to use to flag emails to be forwarded, and set Slack Outcoming Webhook URL.
 
 ### 4. Configure trigger
 
