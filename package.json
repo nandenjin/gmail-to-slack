@@ -19,7 +19,7 @@
     "test": "jest"
   },
   "devDependencies": {
-    "@google/clasp": "^2.4.0",
+    "@google/clasp": "^2.4.1",
     "@slack/webhook": "^6.0.0",
     "@types/google-apps-script": "^1.0.37",
     "@types/jest": "^26.0.24",
