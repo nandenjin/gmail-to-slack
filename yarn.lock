@@ -879,10 +879,10 @@
     "@types/node" "*"
     "@types/responselike" "*"
 
-"@types/google-apps-script@^1.0.37":
-  version "1.0.37"
-  resolved "https://registry.yarnpkg.com/@types/google-apps-script/-/google-apps-script-1.0.37.tgz#97a932d579034992ca8982b0e137f1d709b77c99"
-  integrity sha512-iuXrNzkMOjSfo4PBgqFqGYmgYWRzcr1Nq7L3E+nLP8jvyxXpwL5cyNpf4XjuSsFHVt/FmsEmlPeiWdrRPSkfwQ==
+"@types/google-apps-script@^1.0.38":
+  version "1.0.38"
+  resolved "https://registry.yarnpkg.com/@types/google-apps-script/-/google-apps-script-1.0.38.tgz#ec1b4df5e6d1723ce413f7a27dbf820ad7ebb886"
+  integrity sha512-E8Vd3ZGSonieCJ/Q4nOUc1/p7FJHoZfPaNrr+C64ZdGFe/67vADaq0Mm5TUJcqvq63l4tQ1b+GiX1YRliCa2kQ==
 
 "@types/graceful-fs@^4.1.2":
   version "4.1.5"
@@ -1144,12 +1144,7 @@ ansi-escapes@^4.2.1:
   dependencies:
     type-fest "^0.21.3"
 
-ansi-regex@^5.0.0:
-  version "5.0.1"
-  resolved "https://registry.yarnpkg.com/ansi-regex/-/ansi-regex-5.0.1.tgz#082cb2c89c9fe8659a311a53bd6a4dc5301db304"
-  integrity sha512-quJQXlTSUGL2LH9SUXo8VwsY4soanhgo6LNSm84E1LBcE8s3O0wpdiRzyR9z/ZZJMlMWv37qOOb9pdJlMUEKFQ==
-
-ansi-regex@^5.0.1:
+ansi-regex@^5.0.0, ansi-regex@^5.0.1:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/ansi-regex/-/ansi-regex-5.0.1.tgz#082cb2c89c9fe8659a311a53bd6a4dc5301db304"
   integrity sha512-quJQXlTSUGL2LH9SUXo8VwsY4soanhgo6LNSm84E1LBcE8s3O0wpdiRzyR9z/ZZJMlMWv37qOOb9pdJlMUEKFQ==
