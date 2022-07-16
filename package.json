@@ -30,6 +30,6 @@
     "eslint-plugin-googleappsscript": "1.0.4",
     "jest": "28.1.3",
     "prettier": "2.7.1",
-    "ts-jest": "28.0.6"
+    "ts-jest": "28.0.7"
   }
 }
