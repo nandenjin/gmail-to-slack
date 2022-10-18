@@ -22,7 +22,7 @@
     "@google/clasp": "2.4.2",
     "@slack/webhook": "6.1.0",
     "@types/google-apps-script": "1.0.55",
-    "@types/jest": "29.1.2",
+    "@types/jest": "29.2.0",
     "@typescript-eslint/eslint-plugin": "5.40.1",
     "@typescript-eslint/parser": "5.40.1",
     "eslint": "8.25.0",
