@@ -24,7 +24,7 @@ export function main(): void {
     const thread = threads[i]
     const message = thread.getMessages().pop()
     const subject = message.getSubject()
-    const body = message.getPlainBody()
+    const body = message.getPlainBody().substring(0, 2048)
     const from = message.getFrom()
 
     console.log(`Forwarding the thread... : "${subject}"`)
