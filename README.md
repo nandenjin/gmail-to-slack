@@ -1,6 +1,6 @@
 <div align="center">
   <h1>:email: Gmail to Slack Forwarder</h1>
-  <img alt="GitHub Workflow Status" src="https://img.shields.io/github/workflow/status/nandenjin/gmail-to-slack/CI?style=flat-square">
+  <img alt="GitHub Workflow Status" src="https://img.shields.io/github/actions/workflow/status/nandenjin/gmail-to-slack/push.yml?style=flat-square">
   <a href="https://codeclimate.com/github/nandenjin/gmail-to-slack"><img alt="Code Climate maintainability" src="https://img.shields.io/codeclimate/maintainability/nandenjin/gmail-to-slack?style=flat-square"></a>
   <img alt="GitHub" src="https://img.shields.io/github/license/nandenjin/gmail-to-slack?style=flat-square">
 </div>
