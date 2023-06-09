@@ -1627,10 +1627,10 @@ eslint-config-prettier@8.8.0:
   resolved "https://registry.yarnpkg.com/eslint-config-prettier/-/eslint-config-prettier-8.8.0.tgz#bfda738d412adc917fd7b038857110efe98c9348"
   integrity sha512-wLbQiFre3tdGgpDv67NQKnJuTlcUVYHas3k+DZCc2U2BadthoEY4B7hLPvAxaqdyOGCzuLfii2fqGph10va7oA==
 
-eslint-plugin-googleappsscript@1.0.4:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-googleappsscript/-/eslint-plugin-googleappsscript-1.0.4.tgz#ba995b237cdec18bd72402a8c9023675d2a70510"
-  integrity sha512-Z6w1EMw0z0VOUvI0PFquigNSkYTgB+pVb2O2KYedDHnllwrgjjNBOLxsqPmtwmjOtFqCu7TuL0hJQwxVnp5OzQ==
+eslint-plugin-googleappsscript@1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-googleappsscript/-/eslint-plugin-googleappsscript-1.0.5.tgz#81ce3f869036780c6d7fe8229f526b8673c8aa47"
+  integrity sha512-pzGdRAoGzjefsGs1ct1MSip9RbBn24xJd/CxD2bszDU3HkuFYenAg/tpTGQQSb2hYMre0uL/H3IIGhN4qSnQTA==
   dependencies:
     requireindex "~1.1.0"
 
