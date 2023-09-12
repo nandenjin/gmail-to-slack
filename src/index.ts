@@ -20,6 +20,8 @@ export function main(): void {
   const label = GmailApp.getUserLabelByName(labelName)
   const threads = label.getThreads()
 
+  const errors: Error[] = []
+
   for (let i = threads.length - 1; 0 <= i; i--) {
     const thread = threads[i]
     const message = thread.getMessages().pop()
@@ -29,20 +31,34 @@ export function main(): void {
 
     console.log(`Forwarding the thread... : "${subject}"`)
 
-    // Post to Slack for each thread
-    postToSlack({
-      username: from,
-      text: '',
-      attachments: [
-        {
-          title: subject,
-          text: body,
-        },
-      ],
-    })
+    try {
+      // Post to Slack for each thread
+      postToSlack({
+        username: from,
+        text: '',
+        attachments: [
+          {
+            title: subject,
+            text: body,
+          },
+        ],
+      })
+    } catch (e) {
+      console.error('Failed to forwarding!')
+      console.error(e)
+
+      errors.push(e)
+
+      continue
+    }
 
     // Remove label from thread
     thread.removeLabel(label)
+  }
+
+  // Finish with "error" state when there is at least one error
+  if (errors.length > 0) {
+    throw new Error('Failed to forwarding!')
   }
 }
 
@@ -120,9 +136,18 @@ function postToSlack(msg: IncomingWebhookSendArguments): void {
   const url = PropertiesService.getScriptProperties().getProperty(
     PropertyKey.SLACK_URL
   )
-
-  UrlFetchApp.fetch(url, {
+  const response = UrlFetchApp.fetch(url, {
     method: 'post',
     payload: 'payload=' + encodeURIComponent(JSON.stringify(msg)),
+    muteHttpExceptions: true,
   })
+
+  const responseCode = response.getResponseCode()
+  if (200 <= responseCode && responseCode < 300) {
+    console.log('Successfly forwarded.')
+  } else {
+    console.log('Payload: ', msg)
+    console.error('Response: ', response.getContentText())
+    throw new Error('Webhook responded with error code:' + responseCode)
+  }
 }
