@@ -27,7 +27,14 @@ export function main(): void {
     const message = thread.getMessages().pop()
     const subject = message.getSubject()
     const body = message.getPlainBody().substring(0, 2048)
-    const from = message.getFrom()
+    let from = message.getFrom()
+
+    // Truncate if the length of from is too long
+    // todo - Preserve domain or whole email address if possible
+    if (from.length > 50) {
+      const postfix = '...'
+      from = from.substring(0, 50 - postfix.length) + postfix
+    }
 
     console.log(`Forwarding the thread... : "${subject}"`)
 
