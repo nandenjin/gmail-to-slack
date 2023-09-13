@@ -1,22 +1,26 @@
 import { IncomingWebhookSendArguments } from '@slack/webhook'
 import { props } from './props'
 
-function prepareEmailFrom(from: string) {
-  // Truncate if the length of from is too long
-  // todo - Preserve domain or whole email address if possible
-  if (from.length > 50) {
-    const postfix = '...'
-    from = from.substring(0, 50 - postfix.length) + postfix
+export namespace slackUtil {
+  export function prepareEmailFrom(from: string) {
+    // Truncate if the length of from is too long
+    // todo - Preserve domain or whole email address if possible
+    if (from.length > 50) {
+      const postfix = '...'
+      from = from.substring(0, 50 - postfix.length) + postfix
+    }
+
+    return from
   }
 
-  return from
-}
+  export function prepareEmailBody(body: string) {
+    return body
+      .replace(/\n-+\s*Original message\s*-+\n[\s\S]*$/i, '')
+      .replace(/\n\d{4}.+? \d{1,2}:\d{2} .+?<.+?@.+?>:\s+>[\s\S]*$/i, '')
+      .replace(/\s*$/, '')
+      .substring(0, 2048)
+  }
 
-function prepareEmailBody(body: string) {
-  return body.substring(0, 2048)
-}
-
-export namespace slackUtil {
   /**
    * Compose message for Slack
    * @param from Sender of the email
