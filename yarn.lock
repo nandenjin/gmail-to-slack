@@ -738,10 +738,10 @@
     "@types/node" "*"
     "@types/responselike" "^1.0.0"
 
-"@types/google-apps-script@1.0.68":
-  version "1.0.68"
-  resolved "https://registry.yarnpkg.com/@types/google-apps-script/-/google-apps-script-1.0.68.tgz#68494e4f28e78b26c6fab1f44d45fcac9de12db6"
-  integrity sha512-G40R7mgGVdb3NlGSa8RkEZh5DbBqNKQTZI6aad012apakg//+kDQU1rrWRSuscuWlJk59uvpLE8kUMO7oIkUDA==
+"@types/google-apps-script@1.0.78":
+  version "1.0.78"
+  resolved "https://registry.yarnpkg.com/@types/google-apps-script/-/google-apps-script-1.0.78.tgz#4ba09b538d19582ac031d5cd1294794c7a6aba07"
+  integrity sha512-JOTy4vjBQ+HfdtJMkfcNF5WM8RC3R6SVp90bd8BCFvNWSaQ7zzP3abOLuJSCwQHjt0hWftofckvhwEcZjZ4hcQ==
 
 "@types/graceful-fs@^4.1.3":
   version "4.1.9"
