@@ -15,8 +15,8 @@ Forward emails from Gmail to Slack by using [Google Apps Script](https://develop
 - Integrates with any channels in Slack by [Incoming Webhooks](https://slack.com/help/articles/115005265063)
 - Web-based configuration UI
 
-| **For users of paid plans:** You can use **channel email address**, which is an official built-in feature of Slack. |
-|---|
+> [!NOTE]
+> **For users of paid plans:** You can use **channel email address**, which is an official built-in feature of Slack. 
 
 Actual behavior of this script is very simple:
 
