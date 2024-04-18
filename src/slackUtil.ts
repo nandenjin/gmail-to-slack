@@ -13,12 +13,27 @@ export namespace slackUtil {
     return from
   }
 
-  export function prepareEmailBody(body: string) {
-    return body
+  export function prepareEmailBody(body: string): string {
+    const originalLines = body
       .replace(/\n-+\s*Original message\s*-+\n[\s\S]*$/i, '')
       .replace(/\n\d{4}.+? \d{1,2}:\d{2} .+?<.+?@.+?>:\s+>[\s\S]*$/i, '')
       .replace(/\s*$/, '')
-      .substring(0, 2048)
+      .split('\n')
+
+    const resultLines: string[] = []
+    /** Virtual length of lines */
+    let len = 0
+    for (const line of originalLines) {
+      len += Math.round(line.length / 30) // Treat 30 characters as one line
+      resultLines.push(line)
+
+      // Truncate if the length of lines is too long
+      if (len > 15) {
+        resultLines.push('(...)')
+        break
+      }
+    }
+    return resultLines.join('\n')
   }
 
   /**
