@@ -15,9 +15,16 @@ export namespace slackUtil {
 
   export function prepareEmailBody(body: string): string {
     const originalLines = body
+      // Truncate original messages
       .replace(/\n-+\s*Original message\s*-+\n[\s\S]*$/i, '')
       .replace(/\n\d{4}.+? \d{1,2}:\d{2} .+?<.+?@.+?>:\s+>[\s\S]*$/i, '')
+
+      // Remove spaces at the end of body
       .replace(/\s*$/, '')
+
+      // Remove multiple line-breaks
+      .replace(/\n{3,}/g, '\n\n')
+
       .split('\n')
 
     const resultLines: string[] = []
