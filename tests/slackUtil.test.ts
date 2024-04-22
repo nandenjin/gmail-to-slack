@@ -41,4 +41,31 @@ Reply text
       )
     ).toBe('This is a test email.')
   })
+
+  it('removes spaces at the end of body', () => {
+    expect(slackUtil.prepareEmailBody(`This is a test email.   `)).toBe(
+      'This is a test email.'
+    )
+  })
+
+  it('removes multiple line-breaks', () => {
+    expect(
+      slackUtil.prepareEmailBody(
+        `
+This is a test email.
+
+This should be kept 👆
+
+
+This should be removed 👆`
+      )
+    ).toBe(
+      `
+This is a test email.
+
+This should be kept 👆
+
+This should be removed 👆`
+    )
+  })
 })
