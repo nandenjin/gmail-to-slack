@@ -16,7 +16,7 @@
     "lint": "eslint .",
     "lintfix": "eslint --fix .",
     "format": "prettier --write .",
-    "test": "jest"
+    "test": "jest --coverage"
   },
   "devDependencies": {
     "@google/clasp": "2.4.2",
