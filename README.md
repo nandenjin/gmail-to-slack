@@ -1,7 +1,8 @@
 <div align="center">
   <h1>:email: Gmail to Slack Forwarder</h1>
   <img alt="GitHub Workflow Status" src="https://img.shields.io/github/actions/workflow/status/nandenjin/gmail-to-slack/push.yml?style=flat-square">
-  <a href="https://codeclimate.com/github/nandenjin/gmail-to-slack"><img alt="Code Climate maintainability" src="https://img.shields.io/codeclimate/maintainability/nandenjin/gmail-to-slack?style=flat-square"></a>
+  <a href="https://codeclimate.com/github/nandenjin/gmail-to-slack" target="_blank" rel="noopener noreferrer"><img alt="Code Climate maintainability" src="https://img.shields.io/codeclimate/maintainability/nandenjin/gmail-to-slack?style=flat-square"></a>
+  <a href="https://app.codecov.io/gh/nandenjin/gmail-to-slack" target="_blank" rel="noopener noreferrer"><img alt="Codecov" src="https://img.shields.io/codecov/c/github/nandenjin/gmail-to-slack?style=flat-square&logo=codecov"></a>
   <img alt="GitHub" src="https://img.shields.io/github/license/nandenjin/gmail-to-slack?style=flat-square">
 </div>
 
@@ -15,8 +16,7 @@ Forward emails from Gmail to Slack by using [Google Apps Script](https://develop
 - Integrates with any channels in Slack by [Incoming Webhooks](https://slack.com/help/articles/115005265063)
 - Web-based configuration UI
 
-> [!NOTE]
-> **For users of paid plans:** You can use **channel email address**, which is an official built-in feature of Slack. 
+> [!NOTE] > **For users of paid plans:** You can use **channel email address**, which is an official built-in feature of Slack.
 
 Actual behavior of this script is very simple:
 
