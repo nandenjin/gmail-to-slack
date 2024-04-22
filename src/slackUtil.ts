@@ -24,7 +24,7 @@ export namespace slackUtil {
     /** Virtual length of lines */
     let len = 0
     for (const line of originalLines) {
-      len += Math.round(line.length / 30) // Treat 30 characters as one line
+      len += Math.ceil(line.length / 30) // Treat 30 characters as one line
       resultLines.push(line)
 
       // Truncate if the length of lines is too long
