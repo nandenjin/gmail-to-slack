@@ -1,7 +1,7 @@
 /* eslint-env node */
 module.exports = {
   "roots": [
-    "<rootDir>/tests"
+    "<rootDir>"
   ],
   "testMatch": [
     "**/__tests__/**/*.+(ts|tsx|js)",

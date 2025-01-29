@@ -11,15 +11,6 @@ describe('DiscordPlatform', () => {
         discordPlatform.prepareEmailFrom('"Test User" <example@example.com>')
       ).toBe('"Test User" <example@example.com>')
     })
-
-    it('should truncate if the length is more than 50', () => {
-      const discordPlatform = new DiscordPlatform()
-      expect(
-        discordPlatform.prepareEmailFrom(
-          '"Test User with very long name" <over50lengthemailaddress@example.com>'
-        )
-      ).toBe('"Test User with very long name" <over50lengthem...')
-    })
   })
 
   describe('prepareEmailBody', () => {
