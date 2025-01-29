@@ -31,9 +31,11 @@ export function main(): void {
       }
 
       // Post to the detected platform for each thread
-      messagePlatform.postMessage(
-        url,
-        messagePlatform.composeMessage(from, subject, body)
+      console.log(
+        messagePlatform.postMessage(
+          url,
+          messagePlatform.composeMessage(from, subject, body)
+        )
       )
     } catch (e) {
       console.error('Failed to forwarding!')

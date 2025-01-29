@@ -61,10 +61,12 @@ export class DiscordPlatform implements MessagePlatform {
     url: string,
     msg: RESTPostAPIWebhookWithTokenJSONBody
   ): RESTPostAPIWebhookWithTokenWaitResult {
-    const urlWithWait = new URL(url)
-    urlWithWait.searchParams.set('wait', 'true')
+    // Add query parameter to wait for the response
+    if (!url.includes('?')) url += '?'
+    else url += '&'
+    url += 'wait=true'
 
-    const response = UrlFetchApp.fetch(urlWithWait.toString(), {
+    const response = UrlFetchApp.fetch(url.toString(), {
       method: 'post',
       payload: JSON.stringify(msg),
       contentType: 'application/json',
