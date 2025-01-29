@@ -1,5 +1,8 @@
 import { MessagePlatform } from './MessagePlatform'
-import { RESTPostAPIWebhookWithTokenJSONBody } from 'discord-api-types/v10'
+import type {
+  RESTPostAPIWebhookWithTokenJSONBody,
+  RESTPostAPIWebhookWithTokenWaitResult,
+} from 'discord-api-types/v10'
 
 export class DiscordPlatform implements MessagePlatform {
   prepareEmailFrom(from: string) {
@@ -54,8 +57,14 @@ export class DiscordPlatform implements MessagePlatform {
     }
   }
 
-  postMessage(url: string, msg: RESTPostAPIWebhookWithTokenJSONBody): void {
-    const response = UrlFetchApp.fetch(url, {
+  postMessage(
+    url: string,
+    msg: RESTPostAPIWebhookWithTokenJSONBody
+  ): RESTPostAPIWebhookWithTokenWaitResult {
+    const urlWithWait = new URL(url)
+    urlWithWait.searchParams.set('wait', 'true')
+
+    const response = UrlFetchApp.fetch(urlWithWait.toString(), {
       method: 'post',
       payload: JSON.stringify(msg),
       contentType: 'application/json',
@@ -65,6 +74,7 @@ export class DiscordPlatform implements MessagePlatform {
     const responseCode = response.getResponseCode()
     if (200 <= responseCode && responseCode < 300) {
       console.log('Successfully forwarded.')
+      return JSON.parse(response.getContentText())
     } else {
       console.log('Payload: ', msg)
       console.error('Response: ', response.getContentText())
