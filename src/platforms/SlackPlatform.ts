@@ -1,7 +1,7 @@
 import { IncomingWebhookSendArguments } from '@slack/webhook'
 import { MessagePlatform } from './MessagePlatform'
 
-export class SlackPlatform extends MessagePlatform {
+export class SlackPlatform implements MessagePlatform {
   prepareEmailFrom(from: string) {
     // Truncate if the length of from is too long
     // todo - Preserve domain or whole email address if possible

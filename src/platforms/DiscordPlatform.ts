@@ -1,7 +1,7 @@
 import { MessagePlatform } from './MessagePlatform'
 import { RESTPostAPIWebhookWithTokenJSONBody } from 'discord-api-types/v10'
 
-export class DiscordPlatform extends MessagePlatform {
+export class DiscordPlatform implements MessagePlatform {
   prepareEmailFrom(from: string) {
     return from
   }
