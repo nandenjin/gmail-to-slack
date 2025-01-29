@@ -70,7 +70,7 @@ export namespace slackUtil {
    * @param msg Argument for Incoming Webhook
    */
   export function postMessage(msg: IncomingWebhookSendArguments): void {
-    const url = props.getSlackUrl()
+    const url = props.getWebhookUrl()
     const response = UrlFetchApp.fetch(url, {
       method: 'post',
       payload: 'payload=' + encodeURIComponent(JSON.stringify(msg)),

@@ -18,7 +18,7 @@ export function main(): void {
     console.log(`Forwarding the thread... : "${subject}"`)
 
     try {
-      const url = props.getSlackUrl()
+      const url = props.getWebhookUrl()
       const platform = props.getPlatformFromUrl(url)
       let messagePlatform: MessagePlatform
 

@@ -1,6 +1,7 @@
 export namespace props {
   enum PropertyKey {
-    SLACK_URL = 'slackUrl',
+    SLACK_URL = 'slackUrl', // For backward compatibility
+    WEBHOOK_URL = 'webhookUrl',
     GMAIL_LABEL = 'gmailLabel',
   }
 
@@ -43,22 +44,25 @@ export namespace props {
   }
 
   /**
-   * Get Slack webhook URL that is currently set
+   * Get webhook URL that is currently set
    */
-  export function getSlackUrl(): string {
-    return PropertiesService.getScriptProperties().getProperty(
-      PropertyKey.SLACK_URL
+  export function getWebhookUrl(): string {
+    return (
+      PropertiesService.getScriptProperties().getProperty(
+        PropertyKey.WEBHOOK_URL
+      ) ||
+      PropertiesService.getScriptProperties().getProperty(PropertyKey.SLACK_URL) // For backward compatibility
     )
   }
 
   /**
-   * Set Slack webhook URL
+   * Set webhook URL
    * @param url URL to be set
    * @returns New URL
    */
-  export function setSlackUrl(url: string): string {
+  export function setWebhookUrl(url: string): string {
     PropertiesService.getScriptProperties().setProperty(
-      PropertyKey.SLACK_URL,
+      PropertyKey.WEBHOOK_URL,
       url
     )
     return url
