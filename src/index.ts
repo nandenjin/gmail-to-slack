@@ -2,6 +2,7 @@ import { gmailUtil } from './gmailUtil'
 import { props } from './props'
 import { SlackPlatform } from './platforms/SlackPlatform'
 import { DiscordPlatform } from './platforms/DiscordPlatform'
+import { MessagePlatform } from './platforms/MessagePlatform'
 
 /**
  * Handle time-based event execution
@@ -19,7 +20,7 @@ export function main(): void {
     try {
       const url = props.getSlackUrl()
       const platform = props.getPlatformFromUrl(url)
-      let messagePlatform
+      let messagePlatform: MessagePlatform
 
       if (platform === 'slack') {
         messagePlatform = new SlackPlatform()
@@ -31,6 +32,7 @@ export function main(): void {
 
       // Post to the detected platform for each thread
       messagePlatform.postMessage(
+        url,
         messagePlatform.composeMessage(from, subject, body)
       )
     } catch (e) {
