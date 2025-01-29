@@ -63,4 +63,19 @@ export namespace props {
     )
     return url
   }
+
+  /**
+   * Detect platform from webhook URL
+   * @param url Webhook URL
+   * @returns Platform name
+   */
+  export function getPlatformFromUrl(url: string): string {
+    if (url.includes('slack.com')) {
+      return 'slack'
+    } else if (url.includes('discord.com')) {
+      return 'discord'
+    } else {
+      throw new Error('Unsupported platform')
+    }
+  }
 }
