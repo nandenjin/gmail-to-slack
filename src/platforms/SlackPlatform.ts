@@ -1,6 +1,5 @@
 import { IncomingWebhookSendArguments } from '@slack/webhook'
 import { MessagePlatform } from './MessagePlatform'
-import { props } from '../props'
 
 export class SlackPlatform extends MessagePlatform {
   prepareEmailFrom(from: string) {
