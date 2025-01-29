@@ -3,12 +3,6 @@ import { RESTPostAPIWebhookWithTokenJSONBody } from 'discord-api-types/v10'
 
 export class DiscordPlatform extends MessagePlatform {
   prepareEmailFrom(from: string) {
-    // Truncate if the length of from is too long
-    if (from.length > 50) {
-      const postfix = '...'
-      from = from.substring(0, 50 - postfix.length) + postfix
-    }
-
     return from
   }
 
@@ -48,8 +42,15 @@ export class DiscordPlatform extends MessagePlatform {
     body: string
   ): RESTPostAPIWebhookWithTokenJSONBody {
     return {
-      username: this.prepareEmailFrom(from),
-      content: `**${subject}**\n${this.prepareEmailBody(body)}`,
+      embeds: [
+        {
+          title: subject,
+          description: this.prepareEmailBody(body),
+          author: {
+            name: this.prepareEmailFrom(from),
+          },
+        },
+      ],
     }
   }
 

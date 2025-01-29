@@ -73,7 +73,11 @@ export namespace props {
     if (url.includes('slack.com')) {
       return 'slack'
     } else if (url.includes('discord.com')) {
-      return 'discord'
+      if (url.includes('/slack')) {
+        return 'slack'
+      } else {
+        return 'discord'
+      }
     } else {
       throw new Error('Unsupported platform')
     }
