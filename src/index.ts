@@ -1,5 +1,8 @@
 import { gmailUtil } from './gmailUtil'
-import { slackUtil } from './slackUtil'
+import { props } from './props'
+import { SlackPlatform } from './platforms/SlackPlatform'
+import { DiscordPlatform } from './platforms/DiscordPlatform'
+import { MessagePlatform } from './platforms/MessagePlatform'
 
 /**
  * Handle time-based event execution
@@ -15,8 +18,23 @@ export function main(): void {
     console.log(`Forwarding the thread... : "${subject}"`)
 
     try {
-      // Post to Slack for each thread
-      slackUtil.postMessage(slackUtil.composeMessage(from, subject, body))
+      const url = props.getWebhookUrl()
+      const platform = props.getPlatformFromUrl(url)
+      let messagePlatform: MessagePlatform
+
+      if (platform === 'slack') {
+        messagePlatform = new SlackPlatform()
+      } else if (platform === 'discord') {
+        messagePlatform = new DiscordPlatform()
+      } else {
+        throw new Error('Unsupported platform')
+      }
+
+      // Post to the detected platform for each thread
+      messagePlatform.postMessage(
+        url,
+        messagePlatform.composeMessage(from, subject, body)
+      )
     } catch (e) {
       console.error('Failed to forwarding!')
       console.error(e)

@@ -91,7 +91,7 @@
         .withSuccessHandler((url) => {
           $('#slack-url').val(url)
         })
-        .getSlackUrl()
+        .getWebhookUrl()
 
       // onClick
       $('#save-slack-url').on('click', () => {
@@ -99,7 +99,7 @@
           .withSuccessHandler(() => {
             alert('Successfly updated')
           })
-          .setSlackUrl($('#slack-url').val())
+          .setWebhookUrl($('#slack-url').val())
       })
 
       $('#save-gmail-label').on('click', () => {

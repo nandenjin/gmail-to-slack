@@ -1,8 +1,8 @@
 import { IncomingWebhookSendArguments } from '@slack/webhook'
-import { props } from './props'
+import { MessagePlatform } from './MessagePlatform'
 
-export namespace slackUtil {
-  export function prepareEmailFrom(from: string) {
+export class SlackPlatform implements MessagePlatform {
+  prepareEmailFrom(from: string) {
     // Truncate if the length of from is too long
     // todo - Preserve domain or whole email address if possible
     if (from.length > 50) {
@@ -13,7 +13,7 @@ export namespace slackUtil {
     return from
   }
 
-  export function prepareEmailBody(body: string): string {
+  prepareEmailBody(body: string): string {
     const originalLines = body
       // Truncate original messages
       .replace(/\n-+\s*Original message\s*-+\n[\s\S]*$/i, '')
@@ -43,34 +43,24 @@ export namespace slackUtil {
     return resultLines.join('\n')
   }
 
-  /**
-   * Compose message for Slack
-   * @param from Sender of the email
-   * @param subject Subject of the email
-   * @param body Body of the email
-   */
-  export function composeMessage(
+  composeMessage(
     from: string,
     subject: string,
     body: string
   ): IncomingWebhookSendArguments {
     return {
-      username: prepareEmailFrom(from),
+      username: this.prepareEmailFrom(from),
       text: '',
       attachments: [
         {
           title: subject,
-          text: prepareEmailBody(body),
+          text: this.prepareEmailBody(body),
         },
       ],
     }
   }
 
-  /** Post message to Slack by Incoming Webhook.
-   * @param msg Argument for Incoming Webhook
-   */
-  export function postMessage(msg: IncomingWebhookSendArguments): void {
-    const url = props.getWebhookUrl()
+  postMessage(url: string, msg: IncomingWebhookSendArguments): void {
     const response = UrlFetchApp.fetch(url, {
       method: 'post',
       payload: 'payload=' + encodeURIComponent(JSON.stringify(msg)),

@@ -1,19 +1,12 @@
-import { IncomingWebhookSendArguments } from '@slack/webhook'
-import { props } from './props'
+import { MessagePlatform } from './MessagePlatform'
+import { RESTPostAPIWebhookWithTokenJSONBody } from 'discord-api-types/v10'
 
-export namespace slackUtil {
-  export function prepareEmailFrom(from: string) {
-    // Truncate if the length of from is too long
-    // todo - Preserve domain or whole email address if possible
-    if (from.length > 50) {
-      const postfix = '...'
-      from = from.substring(0, 50 - postfix.length) + postfix
-    }
-
+export class DiscordPlatform implements MessagePlatform {
+  prepareEmailFrom(from: string) {
     return from
   }
 
-  export function prepareEmailBody(body: string): string {
+  prepareEmailBody(body: string): string {
     const originalLines = body
       // Truncate original messages
       .replace(/\n-+\s*Original message\s*-+\n[\s\S]*$/i, '')
@@ -43,43 +36,35 @@ export namespace slackUtil {
     return resultLines.join('\n')
   }
 
-  /**
-   * Compose message for Slack
-   * @param from Sender of the email
-   * @param subject Subject of the email
-   * @param body Body of the email
-   */
-  export function composeMessage(
+  composeMessage(
     from: string,
     subject: string,
     body: string
-  ): IncomingWebhookSendArguments {
+  ): RESTPostAPIWebhookWithTokenJSONBody {
     return {
-      username: prepareEmailFrom(from),
-      text: '',
-      attachments: [
+      embeds: [
         {
           title: subject,
-          text: prepareEmailBody(body),
+          description: this.prepareEmailBody(body),
+          author: {
+            name: this.prepareEmailFrom(from),
+          },
         },
       ],
     }
   }
 
-  /** Post message to Slack by Incoming Webhook.
-   * @param msg Argument for Incoming Webhook
-   */
-  export function postMessage(msg: IncomingWebhookSendArguments): void {
-    const url = props.getWebhookUrl()
+  postMessage(url: string, msg: RESTPostAPIWebhookWithTokenJSONBody): void {
     const response = UrlFetchApp.fetch(url, {
       method: 'post',
-      payload: 'payload=' + encodeURIComponent(JSON.stringify(msg)),
+      payload: JSON.stringify(msg),
+      contentType: 'application/json',
       muteHttpExceptions: true,
     })
 
     const responseCode = response.getResponseCode()
     if (200 <= responseCode && responseCode < 300) {
-      console.log('Successfly forwarded.')
+      console.log('Successfully forwarded.')
     } else {
       console.log('Payload: ', msg)
       console.error('Response: ', response.getContentText())
