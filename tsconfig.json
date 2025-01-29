@@ -1,7 +1,9 @@
 {
   "compilerOptions": {
     "esModuleInterop": true,
-    "allowJs": true
+    "allowJs": true,
+    "lib": ["esnext"],
+    "experimentalDecorators": true
   },
   "exclude": [
     "jest.config.js",
