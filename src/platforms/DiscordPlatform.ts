@@ -1,5 +1,5 @@
 import { MessagePlatform } from './MessagePlatform'
-import { props } from '../props'
+import { RESTPostAPIWebhookWithTokenJSONBody } from 'discord-api-types/v10'
 
 export class DiscordPlatform extends MessagePlatform {
   prepareEmailFrom(from: string) {
@@ -42,15 +42,18 @@ export class DiscordPlatform extends MessagePlatform {
     return resultLines.join('\n')
   }
 
-  composeMessage(from: string, subject: string, body: string): any {
+  composeMessage(
+    from: string,
+    subject: string,
+    body: string
+  ): RESTPostAPIWebhookWithTokenJSONBody {
     return {
       username: this.prepareEmailFrom(from),
       content: `**${subject}**\n${this.prepareEmailBody(body)}`,
     }
   }
 
-  postMessage(msg: any): void {
-    const url = props.getDiscordUrl()
+  postMessage(url: string, msg: RESTPostAPIWebhookWithTokenJSONBody): void {
     const response = UrlFetchApp.fetch(url, {
       method: 'post',
       payload: JSON.stringify(msg),

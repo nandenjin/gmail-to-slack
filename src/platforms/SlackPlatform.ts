@@ -61,8 +61,7 @@ export class SlackPlatform extends MessagePlatform {
     }
   }
 
-  postMessage(msg: IncomingWebhookSendArguments): void {
-    const url = props.getSlackUrl()
+  postMessage(url: string, msg: IncomingWebhookSendArguments): void {
     const response = UrlFetchApp.fetch(url, {
       method: 'post',
       payload: 'payload=' + encodeURIComponent(JSON.stringify(msg)),
