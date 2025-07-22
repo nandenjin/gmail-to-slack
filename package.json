@@ -21,7 +21,7 @@
   "devDependencies": {
     "@google/clasp": "2.5.0",
     "@slack/webhook": "7.0.5",
-    "@types/google-apps-script": "1.0.83",
+    "@types/google-apps-script": "1.0.99",
     "@types/jest": "29.5.12",
     "@typescript-eslint/eslint-plugin": "6.7.0",
     "@typescript-eslint/parser": "6.7.0",
