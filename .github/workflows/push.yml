@@ -15,7 +15,7 @@ jobs:
         run: echo "::set-output name=dir::$(yarn cache dir)"
       - uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 22
           cache: yarn
       - name: Install dependencies
         run: yarn --frozen-lockfile
@@ -28,7 +28,7 @@ jobs:
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
       - uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 22
           cache: yarn
       - name: Install dependencies
         run: yarn --frozen-lockfile
