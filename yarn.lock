@@ -658,14 +658,14 @@
   resolved "https://registry.yarnpkg.com/@slack/types/-/types-2.16.0.tgz#92ba59f9e970440b524423ad694eba4fa4995a86"
   integrity sha512-bICnyukvdklXhwxprR3uF1+ZFkTvWTZge4evlCS4G1H1HU6QLY68AcjqzQRymf7/5gNt6Y4OBb4NdviheyZcAg==
 
-"@slack/webhook@7.0.5":
-  version "7.0.5"
-  resolved "https://registry.yarnpkg.com/@slack/webhook/-/webhook-7.0.5.tgz#1d782faae59e0d9af06b06a51b94acd7d555e5ce"
-  integrity sha512-PmbZx89+SmH4zt78FUwe4If8hWX2MAIRmGXjmlF0A8PwyJb/H7CWaQYV6DDlZn1+7Zs6CEytKH0ejEE/idVSDw==
+"@slack/webhook@7.0.6":
+  version "7.0.6"
+  resolved "https://registry.yarnpkg.com/@slack/webhook/-/webhook-7.0.6.tgz#558dbd00e6400be0e339312a44b8104bf88884a4"
+  integrity sha512-RvNCcOjNbzl5uQ2TZsbTJ+A+5ptoWMwnyd/W4lKzeXFToIwebeaZiuntcP0usmhZHj1LH9H1T9WN6Bt1B/DLyg==
   dependencies:
     "@slack/types" "^2.9.0"
     "@types/node" ">=18.0.0"
-    axios "^1.8.3"
+    axios "^1.11.0"
 
 "@szmarczak/http-timer@^4.0.5":
   version "4.0.6"
@@ -1046,7 +1046,7 @@ asynckit@^0.4.0:
   resolved "https://registry.yarnpkg.com/asynckit/-/asynckit-0.4.0.tgz#c79ed97f7f34cb8f2ba1bc9790bcc366474b4b79"
   integrity sha512-Oei9OH4tRh0YqU3GxhX79dM/mwVgvbZJaSNaRk+bshkj0S5cfHcgYakreBjrHwatXKbz+IoIdYLxrKim2MjW0Q==
 
-axios@^1.8.3:
+axios@^1.11.0:
   version "1.12.2"
   resolved "https://registry.yarnpkg.com/axios/-/axios-1.12.2.tgz#6c307390136cf7a2278d09cec63b136dfc6e6da7"
   integrity sha512-vMJzPewAlRyOgxV2dU0Cuz2O8zzzx9VYtbJOaBgXFeLc4IV/Eg50n4LowmehOOR61S8ZMpc2K5Sa7g6A4jfkUw==
