@@ -25,7 +25,7 @@
     "@types/jest": "30.0.0",
     "@typescript-eslint/eslint-plugin": "8.44.1",
     "@typescript-eslint/parser": "8.44.1",
-    "discord-api-types": "0.38.26",
+    "discord-api-types": "0.38.37",
     "eslint": "8.57.1",
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-googleappsscript": "1.0.5",
