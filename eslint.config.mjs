@@ -2,6 +2,7 @@ import tseslint from '@typescript-eslint/eslint-plugin';
 import tsparser from '@typescript-eslint/parser';
 import googleappsscript from 'eslint-plugin-googleappsscript';
 import prettierConfig from 'eslint-config-prettier';
+import globals from 'globals';
 
 export default [
   {
@@ -43,16 +44,14 @@ export default [
       '.env',
       '.env.test',
       '.env*.local',
-      '.cache',
+      '.cache/',
       '.parcel-cache',
       '.next',
       '.nuxt',
-      'dist',
+      'dist/',
       '.out',
       '.storybook-out',
       'storybook-static',
-      'dist/',
-      '.cache/',
       '.vuepress/dist',
       '.serverless/',
       '.fusebox/',
@@ -64,7 +63,20 @@ export default [
     ],
   },
   {
+    files: ['**/*.config.js', 'jest.config.js'],
+    languageOptions: {
+      globals: {
+        ...globals.node,
+      },
+      parserOptions: {
+        ecmaVersion: 2018,
+        sourceType: 'script',
+      },
+    },
+  },
+  {
     files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx'],
+    ignores: ['**/*.config.js', 'jest.config.js'],
     languageOptions: {
       parser: tsparser,
       parserOptions: {
@@ -72,15 +84,7 @@ export default [
         sourceType: 'module',
       },
       globals: {
-        // ES6 globals
-        Promise: 'readonly',
-        Symbol: 'readonly',
-        WeakMap: 'readonly',
-        WeakSet: 'readonly',
-        Map: 'readonly',
-        Set: 'readonly',
-        Proxy: 'readonly',
-        Reflect: 'readonly',
+        ...globals.es2017,
         // Google Apps Script globals
         GmailApp: 'readonly',
         MailApp: 'readonly',
@@ -103,7 +107,6 @@ export default [
         Jdbc: 'readonly',
         Logger: 'readonly',
         Browser: 'readonly',
-        console: 'readonly',
       },
     },
     plugins: {
