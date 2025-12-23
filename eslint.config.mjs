@@ -63,7 +63,7 @@ export default [
     ],
   },
   {
-    files: ['**/*.config.js', 'jest.config.js'],
+    files: ['**/*.config.js'],
     languageOptions: {
       globals: {
         ...globals.node,
@@ -76,7 +76,7 @@ export default [
   },
   {
     files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx'],
-    ignores: ['**/*.config.js', 'jest.config.js'],
+    ignores: ['**/*.config.js'],
     languageOptions: {
       parser: tsparser,
       parserOptions: {
