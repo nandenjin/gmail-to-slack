@@ -5,6 +5,7 @@
     "lib": ["esnext"],
     "experimentalDecorators": true
   },
+  "include": ["src/**/*.ts"],
   "exclude": [
     "jest.config.js",
     "coverage"
