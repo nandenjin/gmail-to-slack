@@ -8,28 +8,31 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
       - uses: actions/setup-node@v5
         with:
           node-version: 22
-          cache: npm
+          cache: yarn
       - name: Install dependencies
-        run: npm ci
+        run: yarn --frozen-lockfile
       - name: Lint
-        run: npm run lint
+        run: yarn lint
 
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
       - uses: actions/setup-node@v5
         with:
           node-version: 22
-          cache: npm
+          cache: yarn
       - name: Install dependencies
-        run: npm ci
+        run: yarn --frozen-lockfile
       - name: Test
-        run: npm run test
+        run: yarn test
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v5.5.2
         with:
