@@ -1,6 +1,11 @@
 import { IncomingWebhookSendArguments } from '@slack/webhook'
 import { props } from './props'
 
+/**
+ * Limit for email body lines
+ */
+const LIMIT_EMAIL_BODY_LINES = 50
+
 export namespace slackUtil {
   export function prepareEmailFrom(from: string) {
     // Truncate if the length of from is too long
@@ -35,7 +40,7 @@ export namespace slackUtil {
       resultLines.push(line)
 
       // Truncate if the length of lines is too long
-      if (len > 15) {
+      if (len > LIMIT_EMAIL_BODY_LINES) {
         resultLines.push('(...)')
         break
       }
