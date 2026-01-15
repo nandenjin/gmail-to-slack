@@ -1,4 +1,7 @@
-import { IncomingWebhookSendArguments } from '@slack/webhook'
+import {
+  IncomingWebhookSendArguments,
+  IncomingWebhookResult,
+} from '@slack/webhook'
 import { MessagePlatform } from './MessagePlatform'
 
 export class SlackPlatform implements MessagePlatform {
@@ -60,7 +63,10 @@ export class SlackPlatform implements MessagePlatform {
     }
   }
 
-  postMessage(url: string, msg: IncomingWebhookSendArguments): void {
+  postMessage(
+    url: string,
+    msg: IncomingWebhookSendArguments
+  ): IncomingWebhookResult {
     const response = UrlFetchApp.fetch(url, {
       method: 'post',
       payload: 'payload=' + encodeURIComponent(JSON.stringify(msg)),
@@ -75,5 +81,6 @@ export class SlackPlatform implements MessagePlatform {
       console.error('Response: ', response.getContentText())
       throw new Error('Webhook responded with error code:' + responseCode)
     }
+    return JSON.parse(response.getContentText()) as IncomingWebhookResult
   }
 }
