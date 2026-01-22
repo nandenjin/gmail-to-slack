@@ -1,5 +1,5 @@
-import { limitLines } from '../util/content'
-import { truncateOriginalMessage } from '../util/email'
+import { ContentUtil } from '../util/content'
+import { EmailUtil } from '../util/email'
 import { MessagePlatform } from './MessagePlatform'
 import type {
   RESTPostAPIWebhookWithTokenJSONBody,
@@ -18,12 +18,11 @@ export class DiscordPlatform implements MessagePlatform {
   prepareEmailBody(body: string): string {
     body =
       // Truncate original messages
-      truncateOriginalMessage(body)
+      EmailUtil.truncateOriginalMessage(body)
         // Remove multiple line-breaks
         .replace(/\n{3,}/g, '\n\n')
 
-    body = limitLines(body, 30, MAX_BODY_LINES)
-
+    body = ContentUtil.limitLines(body, 30, MAX_BODY_LINES)
     return body
   }
 

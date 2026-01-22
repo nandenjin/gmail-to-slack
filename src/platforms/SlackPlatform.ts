@@ -3,8 +3,8 @@ import {
   IncomingWebhookResult,
 } from '@slack/webhook'
 import { MessagePlatform } from './MessagePlatform'
-import { truncateOriginalMessage } from '../util/email'
-import { limitLines } from '../util/content'
+import { EmailUtil } from '../util/email'
+import { ContentUtil } from '../util/content'
 
 const MAX_BODY_LINES = +(
   PropertiesService.getScriptProperties().getProperty('maxBodyLines') || 15
@@ -25,12 +25,11 @@ export class SlackPlatform implements MessagePlatform {
   prepareEmailBody(body: string): string {
     body =
       // Truncate original messages
-      truncateOriginalMessage(body)
+      EmailUtil.truncateOriginalMessage(body)
         // Remove multiple line-breaks
         .replace(/\n{3,}/g, '\n\n')
 
-    body = limitLines(body, 30, MAX_BODY_LINES)
-
+    body = ContentUtil.limitLines(body, 30, MAX_BODY_LINES)
     return body
   }
 
@@ -63,7 +62,7 @@ export class SlackPlatform implements MessagePlatform {
 
     const responseCode = response.getResponseCode()
     if (200 <= responseCode && responseCode < 300) {
-      console.log('Successfly forwarded.')
+      console.log('Successfully forwarded.')
     } else {
       console.log('Payload: ', msg)
       console.error('Response: ', response.getContentText())

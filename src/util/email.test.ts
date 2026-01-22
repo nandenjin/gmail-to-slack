@@ -1,9 +1,9 @@
-import { truncateOriginalMessage } from './email'
+import { EmailUtil } from './email'
 
 describe('truncateOriginalMessage', () => {
   it('should return text without original message marker as is', () => {
     const input = 'Hello, this is a simple message.'
-    const result = truncateOriginalMessage(input)
+    const result = EmailUtil.truncateOriginalMessage(input)
     expect(result).toBe('Hello, this is a simple message.')
   })
 
@@ -13,7 +13,7 @@ describe('truncateOriginalMessage', () => {
 --- Original message ---
 This is the quoted original message.
 It should be removed.`
-    const result = truncateOriginalMessage(input)
+    const result = EmailUtil.truncateOriginalMessage(input)
     expect(result).toBe('Main content here.')
   })
 
@@ -22,7 +22,7 @@ It should be removed.`
 
 ---------- Original message ----------
 Quoted text here.`
-    const result = truncateOriginalMessage(input)
+    const result = EmailUtil.truncateOriginalMessage(input)
     expect(result).toBe('Content before.')
   })
 
@@ -32,7 +32,7 @@ Quoted text here.`
 2024年1月15日 10:30 Someone <someone@example.com>:
   > Original quoted message
   > More quoted text`
-    const result = truncateOriginalMessage(input)
+    const result = EmailUtil.truncateOriginalMessage(input)
     expect(result).toBe('Reply text here.')
   })
 
@@ -41,12 +41,12 @@ Quoted text here.`
 
 2024/01/15 14:00 John Doe <john@example.com>:
   > Previous message`
-    const result = truncateOriginalMessage(input)
+    const result = EmailUtil.truncateOriginalMessage(input)
     expect(result).toBe('My reply.')
   })
 
   it('should handle empty string', () => {
-    const result = truncateOriginalMessage('')
+    const result = EmailUtil.truncateOriginalMessage('')
     expect(result).toBe('')
   })
 
@@ -59,7 +59,7 @@ Third paragraph.
 
 --- Original message ---
 Quoted content.`
-    const result = truncateOriginalMessage(input)
+    const result = EmailUtil.truncateOriginalMessage(input)
     expect(result).toBe(`First paragraph.
 
 Second paragraph.
