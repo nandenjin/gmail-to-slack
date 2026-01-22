@@ -9,5 +9,8 @@ module.exports = {
   "preset": "ts-jest/presets/js-with-ts-esm",
   "transformIgnorePatterns": [
     "node_modules/(?!ts2gas/.*)"
+  ],
+  "setupFilesAfterEnv": [
+    "<rootDir>/jest.setup.ts"
   ]
 }

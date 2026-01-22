@@ -6,6 +6,10 @@ import type {
   RESTPostAPIWebhookWithTokenWaitResult,
 } from 'discord-api-types/v10'
 
+const MAX_BODY_LINES = +(
+  PropertiesService.getScriptProperties().getProperty('maxBodyLines') || 15
+)
+
 export class DiscordPlatform implements MessagePlatform {
   prepareEmailFrom(from: string) {
     return from
@@ -18,7 +22,7 @@ export class DiscordPlatform implements MessagePlatform {
         // Remove multiple line-breaks
         .replace(/\n{3,}/g, '\n\n')
 
-    body = limitLines(body, 30, 15)
+    body = limitLines(body, 30, MAX_BODY_LINES)
 
     return body
   }

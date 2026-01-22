@@ -3,11 +3,9 @@
     "esModuleInterop": true,
     "allowJs": true,
     "lib": ["esnext"],
+    "skipLibCheck": true,
     "experimentalDecorators": true
   },
   "include": ["src/**/*.ts"],
-  "exclude": [
-    "jest.config.js",
-    "coverage"
-  ]
+  "exclude": ["jest.config.js", "coverage"]
 }
