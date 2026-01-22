@@ -14,36 +14,6 @@ describe('DiscordPlatform', () => {
   })
 
   describe('prepareEmailBody', () => {
-    it('should remove original message', () => {
-      const discordPlatform = new DiscordPlatform()
-      expect(
-        discordPlatform.prepareEmailBody(
-          `This is a test email.
---- Original message ----
-Reply text
-`
-        )
-      ).toBe('This is a test email.')
-
-      expect(
-        discordPlatform.prepareEmailBody(
-          `This is a test email.
-
-2023/1/1 12:34 Test User <example@example.com>:
-
-> Reply text
-`
-        )
-      ).toBe('This is a test email.')
-    })
-
-    it('removes spaces at the end of body', () => {
-      const discordPlatform = new DiscordPlatform()
-      expect(discordPlatform.prepareEmailBody(`This is a test email.   `)).toBe(
-        'This is a test email.'
-      )
-    })
-
     it('removes multiple line-breaks', () => {
       const discordPlatform = new DiscordPlatform()
       expect(
@@ -57,8 +27,7 @@ This should be kept 👆
 This should be removed 👆`
         )
       ).toBe(
-        `
-This is a test email.
+        `This is a test email.
 
 This should be kept 👆
 

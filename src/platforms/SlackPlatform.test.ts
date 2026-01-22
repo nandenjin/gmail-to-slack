@@ -23,36 +23,6 @@ describe('SlackPlatform', () => {
   })
 
   describe('prepareEmailBody', () => {
-    it('should remove original message', () => {
-      const slackPlatform = new SlackPlatform()
-      expect(
-        slackPlatform.prepareEmailBody(
-          `This is a test email.
---- Original message ----
-Reply text
-`
-        )
-      ).toBe('This is a test email.')
-
-      expect(
-        slackPlatform.prepareEmailBody(
-          `This is a test email.
-
-2023/1/1 12:34 Test User <example@example.com>:
-
-> Reply text
-`
-        )
-      ).toBe('This is a test email.')
-    })
-
-    it('removes spaces at the end of body', () => {
-      const slackPlatform = new SlackPlatform()
-      expect(slackPlatform.prepareEmailBody(`This is a test email.   `)).toBe(
-        'This is a test email.'
-      )
-    })
-
     it('removes multiple line-breaks', () => {
       const slackPlatform = new SlackPlatform()
       expect(
@@ -66,8 +36,7 @@ This should be kept 👆
 This should be removed 👆`
         )
       ).toBe(
-        `
-This is a test email.
+        `This is a test email.
 
 This should be kept 👆
 

@@ -1,3 +1,5 @@
+import { limitLines } from '../util/content'
+import { truncateOriginalMessage } from '../util/email'
 import { MessagePlatform } from './MessagePlatform'
 import type {
   RESTPostAPIWebhookWithTokenJSONBody,
@@ -10,33 +12,15 @@ export class DiscordPlatform implements MessagePlatform {
   }
 
   prepareEmailBody(body: string): string {
-    const originalLines = body
+    body =
       // Truncate original messages
-      .replace(/\n-+\s*Original message\s*-+\n[\s\S]*$/i, '')
-      .replace(/\n\d{4}.+? \d{1,2}:\d{2} .+?<.+?@.+?>:\s+>[\s\S]*$/i, '')
+      truncateOriginalMessage(body)
+        // Remove multiple line-breaks
+        .replace(/\n{3,}/g, '\n\n')
 
-      // Remove spaces at the end of body
-      .replace(/\s*$/, '')
+    body = limitLines(body, 30, 15)
 
-      // Remove multiple line-breaks
-      .replace(/\n{3,}/g, '\n\n')
-
-      .split('\n')
-
-    const resultLines: string[] = []
-    /** Virtual length of lines */
-    let len = 0
-    for (const line of originalLines) {
-      len += Math.ceil(line.length / 30) // Treat 30 characters as one line
-      resultLines.push(line)
-
-      // Truncate if the length of lines is too long
-      if (len > 15) {
-        resultLines.push('(...)')
-        break
-      }
-    }
-    return resultLines.join('\n')
+    return body
   }
 
   composeMessage(
