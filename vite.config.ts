@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite'
 import gas from 'rollup-plugin-google-apps-script'
+import { codecovVitePlugin } from '@codecov/vite-plugin'
 
 export default defineConfig({
   plugins: [
@@ -8,6 +9,11 @@ export default defineConfig({
         copy: true,
         srcDir: 'src',
       },
+    }),
+    codecovVitePlugin({
+      enableBundleAnalysis: process.env.CODECOV_TOKEN !== undefined,
+      bundleName: "gmail-to-slack",
+      uploadToken: process.env.CODECOV_TOKEN,
     }),
   ],
   build: {
