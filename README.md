@@ -22,7 +22,7 @@ Actual behavior of this script is very simple:
 
 1. Search threads with specified label from Gmail.
 2. Forward it to Slack.
-3. Reomve the label from the thread.
+3. Remove the label from the thread.
 
 for each time it is called.
 
@@ -38,7 +38,7 @@ git clone https://github.com/nandenjin/gmail-to-slack.git
 cd gmail-to-slack
 
 # Install dependencies
-yarn install
+npm install
 ```
 
 ### 2. Create script
@@ -50,7 +50,7 @@ Create a new project of Google Apps Script (GAS) by using [clasp](https://npmjs.
 npx clasp login
 
 # Create a project
-npx clasp create --rootDir src
+npx clasp create --rootDir dist
 ```
 
 ...or setup manually with exist project.
@@ -62,22 +62,23 @@ cp .clasp.template.json  .clasp.json
 ```json
 {
   "scriptId": "REPLACE_WITH_YOUR_PROJECT_ID",
-  "rootDir": "src"
+  "rootDir": "dist"
 }
 ```
 
-### 3. Push and deploy
+### 3. Build, push and deploy
 
-Push codes to project.
+Build and push codes to project.
 
 ```sh
-clasp push
+npm run build
+npx clasp push
 ```
 
 Open GAS web editor and [publish a deployment](https://developers.google.com/apps-script/concepts/deployments).
 
 ```sh
-clasp open
+npx clasp open
 ```
 
 **Make sure the script is available only for yourself(Execute as = Me, Who has access = Only myself)** or someone can get your configurations: list of your Gmail labels and Slack Webhook URL.

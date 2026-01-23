@@ -1,25 +1,45 @@
-import { gmailUtil } from './gmailUtil'
-import { props } from './props'
+import {
+  getTargetThreads,
+  getThreadContent,
+  resolveThread,
+} from './gmailUtil'
 import { SlackPlatform } from './platforms/SlackPlatform'
 import { DiscordPlatform } from './platforms/DiscordPlatform'
 import { MessagePlatform } from './platforms/MessagePlatform'
+import confgHtml from './config.html?url'
+
+// Export functions for client-side (GAS HTML Service)
+import {
+  getUserGmailLabels,
+  getGmailLabelName,
+  getWebhookUrl,
+  setWebhookUrl,
+  setGmailLabel,
+  getPlatformFromUrl,
+} from './props'
+
+global.getUserGmailLabels = getUserGmailLabels
+global.getGmailLabelName = getGmailLabelName
+global.getWebhookUrl = getWebhookUrl
+global.setWebhookUrl = setWebhookUrl
+global.setGmailLabel = setGmailLabel
 
 /**
  * Handle time-based event execution
  */
-export function main(): void {
+function main(): void {
   const errors: Error[] = []
-  const threads = gmailUtil.getTargetThreads()
+  const threads = getTargetThreads()
 
   for (let i = threads.length - 1; 0 <= i; i--) {
     const thread = threads[i]
-    const { subject, body, from } = gmailUtil.getThreadContent(thread)
+    const { subject, body, from } = getThreadContent(thread)
 
     console.log(`Forwarding the thread... : "${subject}"`)
 
     try {
-      const url = props.getWebhookUrl()
-      const platform = props.getPlatformFromUrl(url)
+      const url = getWebhookUrl()
+      const platform = getPlatformFromUrl(url)
       let messagePlatform: MessagePlatform
 
       if (platform === 'slack') {
@@ -47,7 +67,7 @@ export function main(): void {
     }
 
     // Remove label from thread
-    gmailUtil.resolveThread(thread)
+    resolveThread(thread)
   }
 
   // Finish with "error" state when there is at least one error
@@ -56,9 +76,13 @@ export function main(): void {
   }
 }
 
+global.main = main
+
 /**
  * Handle HTTP GET request
  */
-export function doGet(): GoogleAppsScript.HTML.HtmlOutput {
-  return HtmlService.createHtmlOutputFromFile('config')
+function doGet(): GoogleAppsScript.HTML.HtmlOutput {
+  return HtmlService.createHtmlOutputFromFile(confgHtml.replace(/^\//, ''))
 }
+
+global.doGet = doGet

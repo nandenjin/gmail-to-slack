@@ -1,11 +1,16 @@
 {
   "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
     "esModuleInterop": true,
     "allowJs": true,
-    "lib": ["esnext"],
+    "lib": ["ESNext"],
     "skipLibCheck": true,
-    "experimentalDecorators": true
+    "noEmit": true,
+    "isolatedModules": true,
+    "types": ["vitest/globals", "google-apps-script"]
   },
-  "include": ["src/**/*.ts"],
-  "exclude": ["jest.config.js", "coverage"]
+  "include": ["src/**/*.ts", "*.config.ts", "vitest.setup.ts"],
+  "exclude": ["node_modules", "dist", "coverage"]
 }

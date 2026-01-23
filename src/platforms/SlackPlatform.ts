@@ -3,8 +3,8 @@ import {
   IncomingWebhookResult,
 } from '@slack/webhook'
 import { MessagePlatform } from './MessagePlatform'
-import { EmailUtil } from '../util/email'
-import { ContentUtil } from '../util/content'
+import { truncateOriginalMessage } from '../util/email'
+import { limitLines } from '../util/content'
 
 const MAX_BODY_LINES = +(
   PropertiesService.getScriptProperties().getProperty('maxBodyLines') || 15
@@ -25,11 +25,11 @@ export class SlackPlatform implements MessagePlatform {
   prepareEmailBody(body: string): string {
     body =
       // Truncate original messages
-      EmailUtil.truncateOriginalMessage(body)
+      truncateOriginalMessage(body)
         // Remove multiple line-breaks
         .replace(/\n{3,}/g, '\n\n')
 
-    body = ContentUtil.limitLines(body, 30, MAX_BODY_LINES)
+    body = limitLines(body, 30, MAX_BODY_LINES)
     return body
   }
 

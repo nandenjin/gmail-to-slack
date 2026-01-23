@@ -3,8 +3,9 @@ import tsparser from '@typescript-eslint/parser';
 import googleappsscript from 'eslint-plugin-googleappsscript';
 import prettierConfig from 'eslint-config-prettier';
 import globals from 'globals';
+import { defineConfig } from 'eslint/config';
 
-export default [
+export default defineConfig([
   {
     ignores: [
       '.clasp.json',
@@ -94,8 +95,7 @@ export default [
     },
     rules: {
       ...tseslint.configs.recommended.rules,
-      '@typescript-eslint/no-namespace': 'off',
     },
   },
   prettierConfig,
-];
+]);
