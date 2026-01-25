@@ -1,6 +1,56 @@
 export function truncateOriginalMessage(body: string): string {
-  return body
-    .replace(/\n-+\s*Original message\s*-+\n[\s\S]*$/i, '')
-    .replace(/\n\d{4}.+? \d{1,2}:\d{2} .+?<.+?@.+?>:\s+>[\s\S]*$/i, '')
-    .trim()
+  // Check if this is a forwarded message - if so, don't truncate
+  if (isForwardedMessage(body)) {
+    return body.trim()
+  }
+
+  // Split the body into lines
+  const lines = body.split('\n')
+  const result: string[] = []
+
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i]
+    const trimmedLine = line.trimStart()
+
+    // Check if this line starts a quoted section (line starting with "> ")
+    if (trimmedLine.startsWith('>')) {
+      // Stop including lines from here - this is quoted text
+      break
+    }
+
+    // Check if this line matches an "Original message" delimiter pattern
+    if (/^-+\s*Original message\s*-+$/i.test(line.trim())) {
+      // Stop including lines from here - original message delimiter
+      break
+    }
+
+    // Check if this line matches a Gmail-style reply header pattern
+    // e.g., "2024年1月15日 10:30 Someone <someone@example.com>:"
+    if (/^\d{4}.+?\d{1,2}:\d{2}.+?<.+?@.+?>:\s*$/.test(line.trim())) {
+      // Stop including lines from here - Gmail reply header
+      break
+    }
+
+    // Include the line in the result
+    result.push(line)
+  }
+
+  return result.join('\n').trim()
+}
+
+/**
+ * Checks if a message body appears to be a forwarded message
+ * @param body The email body to check
+ * @returns true if the message appears to be forwarded
+ */
+function isForwardedMessage(body: string): boolean {
+  // Common forwarded message indicators
+  const forwardedPatterns = [
+    /^-+\s*Forwarded message\s*-+/im,
+    /^Begin forwarded message:/im,
+    /^Forwarded message:/im,
+    /^\s*From:.+\n\s*Date:.+\n\s*Subject:/im, // Common forwarded message header
+  ]
+
+  return forwardedPatterns.some((pattern) => pattern.test(body))
 }
