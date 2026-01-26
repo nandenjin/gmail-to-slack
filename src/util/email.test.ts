@@ -105,6 +105,20 @@ And another line.`
 
 And another line.`)
     })
+
+    it('should not remove quoted sections in the middle of message body', () => {
+      const input = `Here is my analysis:
+
+> This is what the customer said
+> in their feedback
+
+I think we should address this by doing XYZ.
+
+What do you think?`
+      const result = truncateOriginalMessage(input)
+      // Should preserve the entire message including inline quotes
+      expect(result).toBe(input)
+    })
   })
 
   describe('forwarded message handling', () => {

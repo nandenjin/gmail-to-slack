@@ -14,8 +14,23 @@ export function truncateOriginalMessage(body: string): string {
 
     // Check if this line starts a quoted section (line starting with "> ")
     if (trimmedLine.startsWith('>')) {
-      // Stop including lines from here - this is quoted text
-      break
+      // Check if this is a trailing quoted section (at the end of the message)
+      // by looking ahead to see if there's any non-quoted, non-empty content after this
+      let hasContentAfter = false
+      for (let j = i + 1; j < lines.length; j++) {
+        const futureLineTrimmed = lines[j].trimStart()
+        // If we find a non-empty line that doesn't start with >, there's content after
+        if (futureLineTrimmed && !futureLineTrimmed.startsWith('>')) {
+          hasContentAfter = true
+          break
+        }
+      }
+
+      // Only truncate if this quoted section is at the end (no content after)
+      if (!hasContentAfter) {
+        // Stop including lines from here - this is trailing quoted text
+        break
+      }
     }
 
     // Check if this line matches an "Original message" delimiter pattern
@@ -63,7 +78,7 @@ function isForwardedMessage(body: string): boolean {
 
   // Check for forwarded message headers (From, Date, Subject)
   // These can appear in any order within the first few lines
-  const lines = body.split('\n').slice(0, 10) // Check first 10 lines only
+  const lines = body.split('\n').slice(0, 100) // Check first 100 lines only
   const hasFrom = lines.some((line) => /^\s*From:\s*.+/i.test(line))
   const hasDate = lines.some((line) => /^\s*Date:\s*.+/i.test(line))
   const hasSubject = lines.some((line) => /^\s*Subject:\s*.+/i.test(line))
