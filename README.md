@@ -16,7 +16,9 @@ Forward emails from Gmail to any messaging platforms by using [Google Apps Scrip
 - Supports Slack Incoming Webhook or Discord Webhook
 - Web-based configuration UI
 
-> [!NOTE] > **For users of paid plans:** You can use **channel email address**, which is an official built-in feature of Slack.
+> [!NOTE]
+> 
+> **For users of paid plans:** You can use **channel email address**, which is an official built-in feature of Slack.
 
 Actual behavior of this script is very simple:
 
