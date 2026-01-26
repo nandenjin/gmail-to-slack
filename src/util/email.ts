@@ -6,31 +6,29 @@ export function truncateOriginalMessage(body: string): string {
 
   // Split the body into lines
   const lines = body.split('\n')
+  
+  // Find the start of trailing quoted section by scanning backwards
+  let trailingQuoteStartIndex = lines.length
+  for (let i = lines.length - 1; i >= 0; i--) {
+    const trimmedLine = lines[i].trimStart()
+    if (trimmedLine.startsWith('>')) {
+      // This is a quoted line - mark it as potential start of trailing section
+      trailingQuoteStartIndex = i
+    } else if (trimmedLine !== '') {
+      // Found non-empty, non-quoted line - any quotes before this are not trailing
+      break
+    }
+    // Empty lines are skipped - they could be part of trailing section
+  }
+
   const result: string[] = []
 
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i]
-    const trimmedLine = line.trimStart()
 
-    // Check if this line starts a quoted section (line starting with "> ")
-    if (trimmedLine.startsWith('>')) {
-      // Check if this is a trailing quoted section (at the end of the message)
-      // by looking ahead to see if there's any non-quoted, non-empty content after this
-      let hasContentAfter = false
-      for (let j = i + 1; j < lines.length; j++) {
-        const futureLineTrimmed = lines[j].trimStart()
-        // If we find a non-empty line that doesn't start with >, there's content after
-        if (futureLineTrimmed && !futureLineTrimmed.startsWith('>')) {
-          hasContentAfter = true
-          break
-        }
-      }
-
-      // Only truncate if this quoted section is at the end (no content after)
-      if (!hasContentAfter) {
-        // Stop including lines from here - this is trailing quoted text
-        break
-      }
+    // Check if we've reached the trailing quoted section
+    if (i >= trailingQuoteStartIndex) {
+      break
     }
 
     // Check if this line matches an "Original message" delimiter pattern
