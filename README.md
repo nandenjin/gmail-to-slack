@@ -1,7 +1,7 @@
 <div align="center">
   <h1>:email: Gmail to Chat Forwarder</h1>
   <img alt="GitHub Workflow Status" src="https://img.shields.io/github/actions/workflow/status/nandenjin/gmail-to-slack/push.yml?style=flat-square">
-  <a href="https://codeclimate.com/github/nandenjin/gmail-to-slack" target="_blank" rel="noopener noreferrer"><img alt="Code Climate maintainability" src="https://img.shields.io/codeclimate/maintainability/nandenjin/gmail-to-slack?style=flat-square"></a>
+  <a href="https://qlty.sh/gh/nandenjin/projects/gmail-to-slack" target="_blank" rel="noopener noreferrer"><img alt="Qlty maintainability" src="https://qlty.sh/gh/nandenjin/projects/gmail-to-slack/maintainability.svg"><!-- shields.io seems to be migrating to new qlty.sh API: https://github.com/badges/shields/issues/11192 --></a>
   <a href="https://app.codecov.io/gh/nandenjin/gmail-to-slack" target="_blank" rel="noopener noreferrer"><img alt="Codecov" src="https://img.shields.io/codecov/c/github/nandenjin/gmail-to-slack?style=flat-square&logo=codecov"></a>
   <img alt="GitHub" src="https://img.shields.io/github/license/nandenjin/gmail-to-slack?style=flat-square">
 </div>
