@@ -1,6 +1,7 @@
 import { limitLines } from '../util/content'
 import { truncateOriginalMessage } from '../util/email'
 import { MessagePlatform } from './MessagePlatform'
+import { TemporaryWebhookError } from '../util/TemporaryWebhookError'
 import type {
   RESTPostAPIWebhookWithTokenJSONBody,
   RESTPostAPIWebhookWithTokenWaitResult,
@@ -64,6 +65,10 @@ export class DiscordPlatform implements MessagePlatform {
     if (200 <= responseCode && responseCode < 300) {
       console.log('Successfully forwarded.')
       return JSON.parse(response.getContentText())
+    } else if (responseCode === 429 || (500 <= responseCode && responseCode < 600)) {
+      console.log('Payload: ', msg)
+      console.info('Response: ', response.getContentText())
+      throw new TemporaryWebhookError(responseCode)
     } else {
       console.log('Payload: ', msg)
       console.error('Response: ', response.getContentText())

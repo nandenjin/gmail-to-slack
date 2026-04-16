@@ -5,6 +5,7 @@ import {
 import { MessagePlatform } from './MessagePlatform'
 import { truncateOriginalMessage } from '../util/email'
 import { limitLines } from '../util/content'
+import { TemporaryWebhookError } from '../util/TemporaryWebhookError'
 
 const MAX_BODY_LINES = +(
   PropertiesService.getScriptProperties().getProperty('maxBodyLines') || 15
@@ -63,6 +64,10 @@ export class SlackPlatform implements MessagePlatform {
     const responseCode = response.getResponseCode()
     if (200 <= responseCode && responseCode < 300) {
       console.log('Successfully forwarded.')
+    } else if (responseCode === 429 || (500 <= responseCode && responseCode < 600)) {
+      console.log('Payload: ', msg)
+      console.info('Response: ', response.getContentText())
+      throw new TemporaryWebhookError(responseCode)
     } else {
       console.log('Payload: ', msg)
       console.error('Response: ', response.getContentText())

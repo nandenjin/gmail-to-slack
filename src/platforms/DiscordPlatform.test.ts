@@ -1,4 +1,5 @@
 import { DiscordPlatform } from './DiscordPlatform'
+import { TemporaryWebhookError } from '../util/TemporaryWebhookError'
 
 describe('DiscordPlatform', () => {
   describe('prepareEmailFrom', () => {
@@ -33,6 +34,76 @@ This should be kept 👆
 
 This should be removed 👆`
       )
+    })
+  })
+
+  describe('postMessage', () => {
+    const mockFetch = vi.fn()
+
+    beforeEach(() => {
+      global.UrlFetchApp = { fetch: mockFetch } as unknown as typeof UrlFetchApp
+    })
+
+    afterEach(() => {
+      vi.clearAllMocks()
+    })
+
+    it('should not throw on 2xx response', () => {
+      mockFetch.mockReturnValue({
+        getResponseCode: () => 200,
+        getContentText: () => JSON.stringify({ id: '123' }),
+      })
+      const platform = new DiscordPlatform()
+      expect(() =>
+        platform.postMessage('https://example.com', {})
+      ).not.toThrow()
+    })
+
+    it('should throw TemporaryWebhookError on 429 response', () => {
+      mockFetch.mockReturnValue({
+        getResponseCode: () => 429,
+        getContentText: () => 'Too Many Requests',
+      })
+      const platform = new DiscordPlatform()
+      expect(() => platform.postMessage('https://example.com', {})).toThrow(
+        TemporaryWebhookError
+      )
+    })
+
+    it('should throw TemporaryWebhookError on 500 response', () => {
+      mockFetch.mockReturnValue({
+        getResponseCode: () => 500,
+        getContentText: () => 'Internal Server Error',
+      })
+      const platform = new DiscordPlatform()
+      expect(() => platform.postMessage('https://example.com', {})).toThrow(
+        TemporaryWebhookError
+      )
+    })
+
+    it('should throw TemporaryWebhookError on 503 response', () => {
+      mockFetch.mockReturnValue({
+        getResponseCode: () => 503,
+        getContentText: () => 'Service Unavailable',
+      })
+      const platform = new DiscordPlatform()
+      expect(() => platform.postMessage('https://example.com', {})).toThrow(
+        TemporaryWebhookError
+      )
+    })
+
+    it('should throw generic Error on 4xx (non-429) response', () => {
+      mockFetch.mockReturnValue({
+        getResponseCode: () => 400,
+        getContentText: () => 'Bad Request',
+      })
+      const platform = new DiscordPlatform()
+      expect(() => platform.postMessage('https://example.com', {})).toThrow(
+        Error
+      )
+      expect(() =>
+        platform.postMessage('https://example.com', {})
+      ).not.toThrow(TemporaryWebhookError)
     })
   })
 })
