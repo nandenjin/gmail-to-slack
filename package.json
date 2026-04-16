@@ -30,7 +30,7 @@
     "@typescript-eslint/eslint-plugin": "8.58.1",
     "@typescript-eslint/parser": "8.58.1",
     "@vitest/coverage-v8": "4.1.4",
-    "discord-api-types": "0.38.44",
+    "discord-api-types": "0.38.45",
     "eslint": "9.39.4",
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-googleappsscript": "1.0.5",
