@@ -107,12 +107,16 @@ This should be removed 👆`
         getContentText: () => 'Bad Request',
       })
       const platform = new SlackPlatform()
-      expect(() => platform.postMessage('https://example.com', {})).toThrow(
-        Error
-      )
-      expect(() =>
+      let thrownError: unknown
+
+      try {
         platform.postMessage('https://example.com', {})
-      ).not.toThrow(TemporaryWebhookError)
+      } catch (error) {
+        thrownError = error
+      }
+
+      expect(thrownError).toBeInstanceOf(Error)
+      expect(thrownError).not.toBeInstanceOf(TemporaryWebhookError)
     })
   })
 })
