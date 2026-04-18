@@ -6,6 +6,7 @@ import {
 import { SlackPlatform } from './platforms/SlackPlatform'
 import { DiscordPlatform } from './platforms/DiscordPlatform'
 import { MessagePlatform } from './platforms/MessagePlatform'
+import { TemporaryWebhookError } from './util/TemporaryWebhookError'
 import confgHtml from './config.html?url'
 
 // Export functions for client-side (GAS HTML Service)
@@ -58,7 +59,12 @@ function main(): void {
         )
       )
     } catch (e) {
-      console.error('Failed to forwarding!')
+      if (e instanceof TemporaryWebhookError) {
+        console.info('Ignoring temporary webhook error:', e.message)
+        continue
+      }
+
+      console.error('Failed to forward thread')
       console.error(e)
 
       errors.push(e)
@@ -72,7 +78,7 @@ function main(): void {
 
   // Finish with "error" state when there is at least one error
   if (errors.length > 0) {
-    throw new Error('Failed to forwarding!')
+    throw new Error('Failed to forward thread')
   }
 }
 
