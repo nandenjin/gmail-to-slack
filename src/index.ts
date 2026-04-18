@@ -64,7 +64,7 @@ function main(): void {
         continue
       }
 
-      console.error('Failed to forwarding!')
+      console.error('Failed to forward thread')
       console.error(e)
 
       errors.push(e)
@@ -78,7 +78,7 @@ function main(): void {
 
   // Finish with "error" state when there is at least one error
   if (errors.length > 0) {
-    throw new Error('Failed to forwarding!')
+    throw new Error('Failed to forward thread')
   }
 }
 
