@@ -35,7 +35,7 @@
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-googleappsscript": "1.0.5",
     "gasmask": "1.3.12",
-    "prettier": "3.8.2",
+    "prettier": "3.8.3",
     "rollup-plugin-gas": "1.0.0",
     "rollup-plugin-google-apps-script": "2.0.2",
     "typescript": "5.9.3",
