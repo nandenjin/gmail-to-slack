@@ -29,7 +29,7 @@
     "@types/google-apps-script": "2.0.8",
     "@typescript-eslint/eslint-plugin": "8.59.0",
     "@typescript-eslint/parser": "8.59.0",
-    "@vitest/coverage-v8": "4.1.4",
+    "@vitest/coverage-v8": "4.1.5",
     "discord-api-types": "0.38.47",
     "eslint": "9.39.4",
     "eslint-config-prettier": "10.1.8",
@@ -40,6 +40,6 @@
     "rollup-plugin-google-apps-script": "2.0.2",
     "typescript": "5.9.3",
     "vite": "4.5.14",
-    "vitest": "4.1.4"
+    "vitest": "4.1.5"
   }
 }
