@@ -23,7 +23,7 @@
     "build": "vite build"
   },
   "devDependencies": {
-    "@codecov/vite-plugin": "1.9.1",
+    "@codecov/vite-plugin": "2.0.1",
     "@google/clasp": "3.3.0",
     "@slack/webhook": "7.0.9",
     "@types/google-apps-script": "2.0.11",
