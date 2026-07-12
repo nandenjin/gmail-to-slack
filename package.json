@@ -38,7 +38,7 @@
     "prettier": "3.9.4",
     "rollup-plugin-gas": "1.0.0",
     "rollup-plugin-google-apps-script": "2.0.2",
-    "typescript": "5.9.3",
+    "typescript": "6.0.3",
     "vite": "4.5.14",
     "vitest": "4.1.9"
   }
