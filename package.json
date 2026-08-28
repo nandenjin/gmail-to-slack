@@ -24,7 +24,7 @@
   },
   "devDependencies": {
     "@codecov/vite-plugin": "2.0.1",
-    "@google/clasp": "3.3.0",
+    "@google/clasp": "3.4.0",
     "@slack/webhook": "7.2.0",
     "@types/google-apps-script": "2.0.12",
     "@typescript-eslint/eslint-plugin": "8.67.0",
